@@ -1,0 +1,29 @@
+{
+  "implicitDependencies": {
+    "workspace.json": "*",
+    "package.json": { "dependencies": "*", "devDependencies": "*" },
+    "tsconfig.base.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*"
+  },
+  "affected": { "defaultBase": "master" },
+  "npmScope": "nx-demo",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "accessToken": "NWMyYjllYzQtNjFlMi00MGEzLThiMzMtYjM4NGFkNDU2YjIxfHJlYWQtd3JpdGU=",
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
+      }
+    }
+  },
+  "projects": {
+    "copilot21": { "tags": [] },
+    "copilot21-e2e": { "tags": [], "implicitDependencies": ["copilot21"] },
+    "ui": { "tags": [] },
+    "data": { "tags": [] }
+  }
+}

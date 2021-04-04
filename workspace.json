@@ -1,0 +1,116 @@
+{
+  "version": 2,
+  "cli": { "defaultCollection": "@nrwl/next" },
+  "generators": {
+    "@nrwl/react": { "application": { "babel": true } },
+    "@nrwl/next": {
+      "application": { "style": "styled-components", "linter": "eslint" }
+    }
+  },
+  "projects": {
+    "copilot21": {
+      "root": "apps/copilot21",
+      "sourceRoot": "apps/copilot21",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/next:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "root": "apps/copilot21",
+            "outputPath": "dist/apps/copilot21"
+          },
+          "configurations": { "production": {} }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "options": { "buildTarget": "copilot21:build", "dev": true },
+          "configurations": {
+            "production": {
+              "buildTarget": "copilot21:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": { "buildTarget": "copilot21:build:production" }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/copilot21"],
+          "options": {
+            "jestConfig": "apps/copilot21/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/copilot21/**/*.{ts,tsx,js,jsx}"]
+          }
+        }
+      }
+    },
+    "copilot21-e2e": {
+      "root": "apps/copilot21-e2e",
+      "sourceRoot": "apps/copilot21-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/copilot21-e2e/cypress.json",
+            "tsConfig": "apps/copilot21-e2e/tsconfig.e2e.json",
+            "devServerTarget": "copilot21:serve"
+          },
+          "configurations": {
+            "production": { "devServerTarget": "copilot21:serve:production" }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": { "lintFilePatterns": ["apps/copilot21-e2e/**/*.{js,ts}"] }
+        }
+      }
+    },
+    "ui": {
+      "root": "libs/ui",
+      "sourceRoot": "libs/ui/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": { "lintFilePatterns": ["libs/ui/**/*.{ts,tsx,js,jsx}"] }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui"],
+          "options": {
+            "jestConfig": "libs/ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "data": {
+      "root": "libs/data",
+      "sourceRoot": "libs/data/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": { "lintFilePatterns": ["libs/data/**/*.ts"] }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/data"],
+          "options": {
+            "jestConfig": "libs/data/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  }
+}
